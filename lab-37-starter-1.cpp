@@ -1,7 +1,8 @@
-// Lab 37 - Milestone 1
+// Lab 37 -Hash Tables 1 | Akashdeep Singh 
 // Demonstrates ASCII sums
 
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 
@@ -10,15 +11,25 @@ int sum_ascii(string s);
 
 int main() {
 
-    // Test string
-    string test = "ABC";
+    ifstream fin("lab-37-data-3.txt");
+    string code;
+    long long grand_total = 0;
 
-    // Call function
-    int result = sum_ascii(test);
+    if (!fin) {
+        cout << "Error opening file." << endl;
+        return 1;
+    }
 
-    // Output result
-    cout << "String: " << test << endl;
-    cout << "ASCII sum: " << result << endl;
+    // Read each 12-character code
+    while (fin >> code) {
+        int value = sum_ascii(code);
+        grand_total += value;
+    }
+
+    fin.close();
+
+    // Output grand total
+    cout << "Grand total: " << grand_total << endl;
 
     return 0;
 }
