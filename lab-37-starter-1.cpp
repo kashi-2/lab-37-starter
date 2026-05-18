@@ -14,6 +14,7 @@ void print_first_100(map<int, list<string>>& hash_table);
 void search_key(map<int, list<string>>& hash_table);
 void add_key(map<int, list<string>>& hash_table);
 void remove_key(map<int, list<string>>& hash_table);
+void modify_key(map<int, list<string>>& hash_table);
 
 int main() {
 
@@ -81,6 +82,9 @@ int main() {
                  break;
             case 4:
                 remove_key(hash_table);
+                break;
+            case 5:
+                modify_key(hash_table);
                 break;
 
 
@@ -212,6 +216,50 @@ void remove_key(map<int, list<string>>& hash_table) {
 
     if (!found) {
         cout << target
+             << " not found." << endl;
+    }
+}
+
+void modify_key(map<int, list<string>>& hash_table) {
+
+    string old_code;
+    string new_code;
+
+    cout << "Enter code to modify: ";
+    cin >> old_code;
+
+    int old_hash = gen_hash_index(old_code);
+
+    bool found = false;
+
+    for (auto it = hash_table[old_hash].begin();
+         it != hash_table[old_hash].end();
+         it++) {
+
+        if (*it == old_code) {
+
+            cout << "Enter new code: ";
+            cin >> new_code;
+
+            // Remove old code
+            hash_table[old_hash].erase(it);
+
+            // Add new code
+            int new_hash = gen_hash_index(new_code);
+
+            hash_table[new_hash].push_back(new_code);
+
+            found = true;
+
+            cout << "Code modified successfully."
+                 << endl;
+
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << old_code
              << " not found." << endl;
     }
 }
