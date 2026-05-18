@@ -70,6 +70,9 @@ int main() {
             case 1:
                 print_first_100(hash_table);
                 break;
+            case 2:
+                search_key(hash_table);
+                break;
 
             case 6:
                 cout << "Exiting program." << endl;
@@ -118,5 +121,36 @@ void print_first_100(map<int, list<string>>& hash_table) {
         if (counter >= 100) {
             break;
         }
+    }
+}
+
+void search_key(map<int, list<string>>& hash_table) {
+
+    string target;
+
+    cout << "Enter code to search for: ";
+    cin >> target;
+
+    int hash_index = gen_hash_index(target);
+
+    bool found = false;
+
+    for (string s : hash_table[hash_index]) {
+
+        if (s == target) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        cout << target
+             << " found at hash index "
+             << hash_index
+             << endl;
+    }
+    else {
+        cout << target
+             << " not found." << endl;
     }
 }
