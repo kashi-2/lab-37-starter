@@ -13,6 +13,7 @@ int gen_hash_index(string code);
 void print_first_100(map<int, list<string>>& hash_table);
 void search_key(map<int, list<string>>& hash_table);
 void add_key(map<int, list<string>>& hash_table);
+void remove_key(map<int, list<string>>& hash_table);
 
 int main() {
 
@@ -78,6 +79,10 @@ int main() {
             case 3:
                  add_key(hash_table);
                  break;
+            case 4:
+                remove_key(hash_table);
+                break;
+
 
             case 6:
                 cout << "Exiting program." << endl;
@@ -175,4 +180,38 @@ void add_key(map<int, list<string>>& hash_table) {
          << " added at hash index "
          << hash_index
          << endl;
+}
+
+void remove_key(map<int, list<string>>& hash_table) {
+
+    string target;
+
+    cout << "Enter code to remove: ";
+    cin >> target;
+
+    int hash_index = gen_hash_index(target);
+
+    bool found = false;
+
+    for (auto it = hash_table[hash_index].begin();
+         it != hash_table[hash_index].end();
+         it++) {
+
+        if (*it == target) {
+
+            hash_table[hash_index].erase(it);
+
+            found = true;
+
+            cout << target
+                 << " removed." << endl;
+
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << target
+             << " not found." << endl;
+    }
 }
