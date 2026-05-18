@@ -11,6 +11,8 @@ using namespace std;
 // Function prototype
 int gen_hash_index(string code);
 void print_first_100(map<int, list<string>>& hash_table);
+void search_key(map<int, list<string>>& hash_table);
+void add_key(map<int, list<string>>& hash_table);
 
 int main() {
 
@@ -73,6 +75,9 @@ int main() {
             case 2:
                 search_key(hash_table);
                 break;
+            case 3:
+                 add_key(hash_table);
+                 break;
 
             case 6:
                 cout << "Exiting program." << endl;
@@ -153,4 +158,21 @@ void search_key(map<int, list<string>>& hash_table) {
         cout << target
              << " not found." << endl;
     }
+}
+
+void add_key(map<int, list<string>>& hash_table) {
+
+    string new_code;
+
+    cout << "Enter code to add: ";
+    cin >> new_code;
+
+    int hash_index = gen_hash_index(new_code);
+
+    hash_table[hash_index].push_back(new_code);
+
+    cout << new_code
+         << " added at hash index "
+         << hash_index
+         << endl;
 }
